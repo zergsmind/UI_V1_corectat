@@ -41,8 +41,8 @@ export default function Hero() {
         .hero-main {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          min-height: calc(100vh - 80px - 90px);
-          padding: 5rem 4rem 4rem;
+          min-height: calc((100vh - 60px) * 0.65);
+          padding: 3rem 4rem 2.5rem;
           gap: 4rem;
           align-items: center;
         }
@@ -191,9 +191,6 @@ export default function Hero() {
               <button className="hero-cta-link" aria-label="Află mai multe detalii despre UII">
                 Află mai mult
               </button>
-            </div>
-            <div className="hero-clock-row">
-              <LiveClock />
             </div>
           </div>
         </div>

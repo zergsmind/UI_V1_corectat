@@ -83,8 +83,9 @@ export default function Navbar() {
           flex: 1;
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-end;
           gap: 2rem;
+          padding-right: 2rem;
         }
         .nav-link {
           font-size: 0.75rem;
@@ -222,9 +223,6 @@ export default function Navbar() {
               {isDark ? <SunIcon /> : <MoonIcon />}
             </button>
 
-            <button className="colaboreaza-btn" aria-label="Colaborează cu UII — deschide formularul de parteneriat">
-              Colaborează <span aria-hidden="true">→</span>
-            </button>
           </div>
         </div>
       </nav>
