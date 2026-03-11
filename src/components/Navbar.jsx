@@ -37,6 +37,7 @@ const COLOR_THEMES = [
 export default function Navbar() {
   const [isDark, setIsDark] = useState(false)
   const [activeTheme, setActiveTheme] = useState('')
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const toggleTheme = () => {
     const next = !isDark
@@ -175,6 +176,60 @@ export default function Navbar() {
           outline: 3px solid var(--c2);
           outline-offset: -3px;
         }
+
+        /* ── Hamburger button (mobile only) ── */
+        .nav-hamburger {
+          display: none;
+          flex-direction: column;
+          justify-content: center;
+          gap: 5px;
+          width: 44px; height: 44px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 0 1rem;
+          margin-left: auto;
+          min-height: unset; min-width: unset;
+          flex-shrink: 0;
+        }
+        .nav-hamburger span {
+          display: block;
+          width: 20px; height: 2px;
+          background: var(--c1);
+          border-radius: 2px;
+          transition: transform 0.2s, opacity 0.2s;
+        }
+        .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+        .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* ── Mobile drawer ── */
+        .nav-drawer {
+          display: none;
+          position: fixed;
+          top: 60px; left: 0; right: 0;
+          background: var(--c4);
+          border-bottom: 1px solid var(--c3);
+          flex-direction: column;
+          padding: 1rem 2rem 1.5rem;
+          gap: 0;
+          z-index: 999;
+        }
+        .nav-drawer.open { display: flex; }
+        .nav-drawer .nav-link {
+          padding: 0.875rem 0;
+          border-bottom: 1px solid var(--c3);
+          font-size: 0.8rem;
+          min-height: unset;
+        }
+        .nav-drawer .nav-link:last-child { border-bottom: none; }
+
+        @media (max-width: 768px) {
+          .nav-logo-text { display: none; }
+          .nav-center { display: none; }
+          .nav-right { display: none; }
+          .nav-hamburger { display: flex; }
+        }
       `}</style>
 
       {/* ADA: nav landmark with descriptive label */}
@@ -195,6 +250,16 @@ export default function Navbar() {
             <a href="#track"     className="nav-link" role="listitem">Track Record</a>
             <a href="#contact" className="nav-link" role="listitem">Contact</a>
           </div>
+
+          {/* Hamburger — mobile only */}
+          <button
+            className={`nav-hamburger${menuOpen ? ' open' : ''}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? 'Închide meniul' : 'Deschide meniul'}
+            aria-expanded={menuOpen}
+          >
+            <span /><span /><span />
+          </button>
 
           <div className="nav-right">
             {/* Color theme picker — hidden, available via JS */}
@@ -226,6 +291,15 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
+
+      {/* Mobile drawer */}
+      <div className={`nav-drawer${menuOpen ? ' open' : ''}`} role="navigation" aria-label="Meniu mobil">
+        <a href="#about"     className="nav-link" onClick={() => setMenuOpen(false)}>Despre</a>
+        <a href="#services"  className="nav-link" onClick={() => setMenuOpen(false)}>Cum Lucrăm</a>
+        <a href="#ecosystem" className="nav-link" onClick={() => setMenuOpen(false)}>Ecosistem</a>
+        <a href="#track"     className="nav-link" onClick={() => setMenuOpen(false)}>Track Record</a>
+        <a href="#contact"   className="nav-link" onClick={() => setMenuOpen(false)}>Contact</a>
+      </div>
     </>
   )
 }

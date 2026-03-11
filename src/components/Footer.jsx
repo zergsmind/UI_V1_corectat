@@ -174,6 +174,13 @@ export default function Footer() {
           .ft-contact-zone { border-left: none; padding-left: 0; border-top: 1px solid rgba(var(--c3-rgb),0.2); padding-top: 1rem; width: 100%; }
           .ft-bottom { padding: 0.75rem 2rem; }
         }
+        @media (max-width: 768px) {
+          .ft-main { padding: 1.25rem 1.5rem; gap: 1.25rem; }
+          .ft-contact-row { flex-direction: column; gap: 0.1rem; }
+          .ft-cvalue { font-size: 0.68rem; word-break: break-all; }
+          .ft-links-zone { flex-wrap: wrap; gap: 1.25rem; }
+          .ft-bottom { flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 0.75rem 1.5rem; }
+        }
       `}</style>
 
       <footer className="ft-root" aria-label="Footer — informații organizație">

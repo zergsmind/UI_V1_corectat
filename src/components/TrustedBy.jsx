@@ -129,8 +129,9 @@ export default function TrustedBy() {
         .tb-partner:hover { color: var(--c1); }
 
         @media (max-width: 768px) {
-          .tb-main { grid-template-columns: 1fr; padding: 3rem 2rem; gap: 2rem; }
+          .tb-main { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 2rem; }
           .tb-stats { grid-template-columns: 1fr 1fr; }
+          .tb-chevron { font-size: 3rem; }
         }
         @media (prefers-reduced-motion: reduce) {
           .tb-marquee-track { animation: none !important; }

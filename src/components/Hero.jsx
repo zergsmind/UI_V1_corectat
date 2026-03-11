@@ -159,11 +159,15 @@ export default function Hero() {
         }
 
         @media (max-width: 900px) {
-          .hero-main { grid-template-columns: 1fr; padding: 3rem 2rem; min-height: auto; }
+          .hero-main { grid-template-columns: 1fr; padding: 2.5rem 1.5rem 2rem; min-height: auto; gap: 2rem; }
           .hero-stats-strip { grid-template-columns: repeat(2, 1fr); }
           .hero-stat:nth-child(2) { border-right: none; }
           .hero-stat:nth-child(3), .hero-stat:nth-child(4) { border-top: 1px solid var(--c3); }
           .hero-stat:last-child { grid-column: 1 / -1; border-top: 1px solid var(--c3); border-right: none; }
+          .hero-chevron { font-size: clamp(2.5rem, 10vw, 4rem); }
+          .hero-stat { padding: 1rem 1.25rem; }
+          .hero-stat-num { font-size: 1.4rem; }
+          .hero-cta-row { flex-wrap: wrap; }
         }
       `}</style>
 

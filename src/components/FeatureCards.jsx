@@ -184,6 +184,14 @@ export default function FeatureCards() {
           padding: 2rem;
           min-height: 280px;
         }
+
+        @media (max-width: 768px) {
+          .fc-header { height: 64px; padding: 0 1.25rem; }
+          .fc-body { grid-template-columns: 1fr; }
+          .fc-body-right { display: none; }
+          .fc-body-left { padding: 1.25rem 1.25rem 2rem; }
+          .fc-title { font-size: clamp(0.85rem, 3.5vw, 1.2rem); }
+        }
       `}</style>
 
       {/* ADA: section landmark */}
