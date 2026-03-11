@@ -4,6 +4,7 @@ import Hero from './components/Hero'
 import FeatureCards from './components/FeatureCards'
 import ActionCards from './components/ActionCards'
 import TrustedBy from './components/TrustedBy'
+import Contact from './components/Contact'
 import Footer from './components/Footer'
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
         <FeatureCards />
         <ActionCards />
         <TrustedBy />
+        <Contact />
       </main>
 
       <Footer />
