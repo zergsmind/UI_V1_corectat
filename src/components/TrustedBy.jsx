@@ -16,7 +16,7 @@ export default function TrustedBy() {
     <>
       <style>{`
         .tb-root {
-          background: #0a1e19;
+          background: var(--c1);
           width: 100%;
         }
         .tb-main {
@@ -34,7 +34,7 @@ export default function TrustedBy() {
         .tb-chevron {
           font-size: 5rem;
           font-weight: 900;
-          color: #D4613A;
+          color: var(--c2);
           line-height: 0.9;
           letter-spacing: -0.05em;
           font-family: 'Inter', sans-serif;
@@ -43,7 +43,7 @@ export default function TrustedBy() {
         .tb-heading {
           font-size: clamp(1.75rem, 3.5vw, 3.25rem);
           font-weight: 800;
-          color: #ffffff;
+          color: var(--c4);
           text-transform: uppercase;
           line-height: 1.1;
           letter-spacing: -0.02em;
@@ -51,7 +51,7 @@ export default function TrustedBy() {
         .tb-right { padding-top: 0.5rem; }
         .tb-desc {
           font-size: 0.9rem;
-          color: rgba(255,255,255,0.55);
+          color: rgba(var(--c4-rgb),0.75);
           line-height: 1.75;
           max-width: 480px;
         }
@@ -64,20 +64,20 @@ export default function TrustedBy() {
         .tb-stat-num {
           font-size: 2.2rem;
           font-weight: 700;
-          color: #D4613A;
+          color: var(--c2);
           line-height: 1;
           letter-spacing: -0.02em;
         }
         .tb-stat-label {
           font-size: 0.72rem;
-          color: rgba(255,255,255,0.5);
+          color: rgba(var(--c4-rgb),0.6);
           letter-spacing: 0.1em;
           text-transform: uppercase;
           margin-top: 0.3rem;
           line-height: 1.4;
         }
         .tb-partners {
-          border-top: 1px solid rgba(255,255,255,0.08);
+          border-top: 1px solid rgba(var(--c4-rgb),0.2);
           display: flex;
           flex-wrap: wrap;
           align-items: center;
@@ -85,7 +85,7 @@ export default function TrustedBy() {
         }
         .tb-partner {
           font-size: 0.68rem;
-          color: rgba(255,255,255,0.25);
+          color: rgba(var(--c4-rgb),0.4);
           letter-spacing: 0.18em;
           text-transform: uppercase;
           font-weight: 500;
@@ -94,7 +94,7 @@ export default function TrustedBy() {
           transition: color 0.2s;
           cursor: default;
         }
-        .tb-partner:hover { color: rgba(255,255,255,0.6); }
+        .tb-partner:hover { color: rgba(var(--c4-rgb),0.85); }
         @media (max-width: 768px) {
           .tb-main {
             grid-template-columns: 1fr;

@@ -26,21 +26,21 @@ const ChartIcon = () => (
 const actionCards = [
   {
     icon: <FoundationIcon />,
-    iconBg: '#1B5E5A',
+    iconBg: 'var(--c1)',
     title: 'DEVINO PARTENER',
     desc: 'Conectează-te la infrastructura UII ca administrație publică, organizație privată sau partener academic. Intrăm în consorții, co-design și proiecte finanțate împreună.',
     cta: 'Înregistrează-te →'
   },
   {
     icon: <UIIIcon />,
-    iconBg: '#0a1e19',
+    iconBg: 'var(--c2)',
     title: 'ECOSISTEMUL UII',
     desc: 'UII conectează administrație publică, sector privat, academie, societate civilă și comunități prin procese standardizate de co-design și diagnostic bazat pe date.',
     cta: 'Află Mai Mult →'
   },
   {
     icon: <ChartIcon />,
-    iconBg: '#D4613A',
+    iconBg: 'var(--c3)',
     title: 'TRACK RECORD',
     desc: '100+ proiecte de spații publice livrate, 3 niveluri de decizie acoperite, 10 organizații japoneze în pipeline activ, reprezentare la Smart City Expo Barcelona și Osaka Expo 2025.',
     cta: 'Explorează →'
@@ -52,7 +52,7 @@ export default function ActionCards() {
     <>
       <style>{`
         .ac-root {
-          background: #f7f4ef;
+          background: var(--c4);
           padding: 5rem 3rem;
         }
         .ac-grid {
@@ -104,8 +104,8 @@ export default function ActionCards() {
           align-items: center;
           gap: 0.25rem;
           margin-top: 2rem;
-          background: #1B5E5A;
-          color: #ffffff;
+          background: var(--c1);
+          color: var(--c4);
           border: none;
           border-radius: 0.5rem;
           padding: 0.75rem 1.5rem;
@@ -116,7 +116,7 @@ export default function ActionCards() {
           transition: background 0.2s;
           align-self: flex-start;
         }
-        .ac-btn:hover { background: #2A7C76; }
+        .ac-btn:hover { background: var(--c2); }
         @media (max-width: 768px) {
           .ac-grid { grid-template-columns: 1fr; }
           .ac-root { padding: 3rem 1.5rem; }
