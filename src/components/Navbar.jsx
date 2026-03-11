@@ -225,7 +225,6 @@ export default function Navbar() {
         .nav-drawer .nav-link:last-child { border-bottom: none; }
 
         @media (max-width: 768px) {
-          .nav-logo-text { display: none; }
           .nav-center { display: none; }
           .nav-right { display: none; }
           .nav-hamburger { display: flex; }
