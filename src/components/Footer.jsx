@@ -8,7 +8,6 @@ const UIILogo = ({ size = 22 }) => (
   </svg>
 )
 
-const currentYear = new Date().getFullYear()
 
 export default function Footer() {
   return (
@@ -242,7 +241,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="ft-bottom">
           <span className="ft-copyright">
-            © 2019–{currentYear} Urban Innovation Institute. Toate drepturile rezervate.
+            © 2026 Urban Innovation Institute Association | Tax ID 52883389
           </span>
           <nav className="ft-legal" aria-label="Link-uri legale">
             <a href="#" className="ft-legal-link">Confidențialitate</a>
