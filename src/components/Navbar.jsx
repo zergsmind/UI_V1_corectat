@@ -55,7 +55,7 @@ export default function Navbar() {
         .nav-root {
           position: fixed;
           top: 0; left: 0; right: 0;
-          height: 80px;
+          height: 60px;
           background: var(--c4);
           border-bottom: 1px solid var(--c3);
           display: flex;
@@ -72,11 +72,12 @@ export default function Navbar() {
           text-decoration: none;
         }
         .nav-logo-text {
-          font-size: 1.05rem;
+          font-size: 0.75rem;
           font-weight: 700;
           color: var(--c1);
-          letter-spacing: 0.12em;
+          letter-spacing: 0.14em;
           text-transform: uppercase;
+          white-space: nowrap;
         }
         .nav-center {
           flex: 1;
@@ -86,8 +87,8 @@ export default function Navbar() {
           gap: 2rem;
         }
         .nav-link {
-          font-size: 0.875rem;
-          font-weight: 500;
+          font-size: 0.75rem;
+          font-weight: 600;
           color: var(--c1);
           text-decoration: none;
           white-space: nowrap;
@@ -96,6 +97,8 @@ export default function Navbar() {
           border-bottom: 2px solid transparent;
           min-height: unset;
           min-width: unset;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
         }
         .nav-link:hover { color: var(--c2); }
         .nav-link:focus-visible {
@@ -147,13 +150,14 @@ export default function Navbar() {
         }
         .theme-toggle:hover { background: var(--c3); }
         .colaboreaza-btn {
-          height: 80px;
+          height: 60px;
           padding: 0 2rem;
           background: var(--c1);
           color: var(--c4);
-          font-size: 0.875rem;
+          font-size: 0.75rem;
           font-weight: 600;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
           border: none;
           cursor: pointer;
           display: flex; align-items: center; gap: 0.5rem;
@@ -179,7 +183,7 @@ export default function Navbar() {
           {/* Logo as home link */}
           <a href="#main-content" className="nav-left" aria-label="UII — pagina principală">
             <UIILogo size={32} onLight={true} />
-            <span className="nav-logo-text" aria-hidden="true">UII</span>
+            <span className="nav-logo-text" aria-hidden="true">Urban Innovation Institute</span>
           </a>
 
           {/* Navigation links */}
@@ -188,14 +192,12 @@ export default function Navbar() {
             <a href="#services"  className="nav-link" role="listitem">Cum Lucrăm</a>
             <a href="#ecosystem" className="nav-link" role="listitem">Ecosistem</a>
             <a href="#track"     className="nav-link" role="listitem">Track Record</a>
-            <a href="#contact"   className="nav-link nav-link-contact" role="listitem">
-              Contact <span className="arrow" aria-hidden="true">→</span>
-            </a>
+            <a href="#contact" className="nav-link" role="listitem">Contact</a>
           </div>
 
           <div className="nav-right">
-            {/* Color theme picker */}
-            <div className="theme-swatches" role="group" aria-label="Selectează tema de culoare">
+            {/* Color theme picker — hidden, available via JS */}
+            <div className="theme-swatches" role="group" aria-label="Selectează tema de culoare" style={{ display: 'none' }}>
               {COLOR_THEMES.map(t => (
                 <button
                   key={t.id}
@@ -209,12 +211,13 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Light/dark toggle */}
+            {/* Light/dark toggle — hidden */}
             <button
               className="theme-toggle"
               onClick={toggleTheme}
               aria-label={isDark ? 'Activează tema luminoasă' : 'Activează tema întunecată'}
               aria-pressed={isDark}
+              style={{ display: 'none' }}
             >
               {isDark ? <SunIcon /> : <MoonIcon />}
             </button>

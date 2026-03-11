@@ -4,6 +4,7 @@ import Hero from './components/Hero'
 import FeatureCards from './components/FeatureCards'
 import ActionCards from './components/ActionCards'
 import TrustedBy from './components/TrustedBy'
+import Footer from './components/Footer'
 
 export default function App() {
   return (
@@ -13,12 +14,14 @@ export default function App() {
 
       <Navbar />
 
-      <main id="main-content" tabIndex={-1} style={{ paddingTop: '80px' }}>
+      <main id="main-content" tabIndex={-1} style={{ paddingTop: '60px' }}>
         <Hero />
         <FeatureCards />
         <ActionCards />
         <TrustedBy />
       </main>
+
+      <Footer />
     </>
   )
 }

@@ -1,23 +1,19 @@
 import React from 'react'
 
-const partners = [
-  'PRIMĂRIA CLUJ-NAPOCA',
-  'PRIMĂRIA TIMIȘOARA',
-  'ONU-HABITAT',
-  'BANCA MONDIALĂ',
-  'UAUIM',
-  'COMISIA EUROPEANĂ',
-  'UNICEF ROMÂNIA',
-  'OSAKA 2025'
-]
+const row1base = ['PRIMĂRIA CLUJ-NAPOCA', 'ONU-HABITAT', 'COMISIA EUROPEANĂ', 'OSAKA 2025']
+const row2base = ['PRIMĂRIA TIMIȘOARA', 'BANCA MONDIALĂ', 'UAUIM', 'UNICEF ROMÂNIA']
+
+// 8× duplication — one half (4×) is always wider than any viewport, guaranteeing no blank gaps
+const row1 = [...row1base, ...row1base, ...row1base, ...row1base, ...row1base, ...row1base, ...row1base, ...row1base]
+const row2 = [...row2base, ...row2base, ...row2base, ...row2base, ...row2base, ...row2base, ...row2base, ...row2base]
 
 export default function TrustedBy() {
   return (
     <>
       <style>{`
         .tb-root {
-          background: var(--c1);
           width: 100%;
+          overflow: hidden;
         }
         .tb-main {
           display: grid;
@@ -25,6 +21,7 @@ export default function TrustedBy() {
           gap: 4rem;
           padding: 5rem 4rem;
           align-items: start;
+          background: var(--c1);
         }
         .tb-left {
           display: flex;
@@ -51,7 +48,7 @@ export default function TrustedBy() {
         .tb-right { padding-top: 0.5rem; }
         .tb-desc {
           font-size: 0.9rem;
-          color: rgba(var(--c4-rgb),0.75);
+          color: rgba(var(--c4-rgb), 0.7);
           line-height: 1.75;
           max-width: 480px;
         }
@@ -73,50 +70,76 @@ export default function TrustedBy() {
         }
         .tb-stat-label {
           font-size: 0.72rem;
-          color: rgba(var(--c4-rgb),0.6);
+          color: rgba(var(--c4-rgb), 0.5);
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          margin-top: 0.3rem;
           line-height: 1.4;
         }
-        .tb-partners {
-          border-top: 1px solid rgba(var(--c4-rgb),0.2);
+
+        /* ── Marquee ── */
+        .tb-marquee-wrap {
+          background: var(--c4);
+          border-top: 1px solid var(--c3);
           display: flex;
-          flex-wrap: wrap;
-          align-items: center;
-          justify-content: space-between;
-          list-style: none;
-          padding: 0;
-          margin: 0;
+          flex-direction: column;
+          gap: 0;
+          overflow: hidden;
         }
+        .tb-marquee-row {
+          display: flex;
+          overflow: hidden;
+          border-bottom: 1px solid var(--c3);
+          padding: 0;
+        }
+        .tb-marquee-track {
+          display: flex;
+          width: max-content;
+          will-change: transform;
+        }
+        .tb-marquee-track.left {
+          animation: tb-scroll-left 28s linear infinite;
+        }
+        .tb-marquee-track.right {
+          animation: tb-scroll-right 28s linear infinite;
+        }
+        /* Translate by exactly 1/8 of total track width = one base set */
+        @keyframes tb-scroll-left {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-12.5%); }
+        }
+        @keyframes tb-scroll-right {
+          from { transform: translateX(-12.5%); }
+          to   { transform: translateX(0); }
+        }
+        .tb-marquee-wrap:hover .tb-marquee-track { animation-play-state: paused; }
+
         .tb-partner {
           font-size: 0.68rem;
-          color: rgba(var(--c4-rgb),0.4);
+          color: rgba(var(--c1-rgb), 0.35);
           letter-spacing: 0.18em;
           text-transform: uppercase;
           font-weight: 500;
-          padding: 2rem 2.5rem;
+          padding: 1.25rem 2.5rem;
           white-space: nowrap;
+          list-style: none;
           transition: color 0.2s;
           cursor: default;
+          border-right: 1px solid var(--c3);
         }
-        .tb-partner:hover { color: rgba(var(--c4-rgb),0.85); }
+        .tb-partner:hover { color: var(--c1); }
+
         @media (max-width: 768px) {
-          .tb-main {
-            grid-template-columns: 1fr;
-            padding: 3rem 2rem;
-            gap: 2rem;
-          }
-          .tb-partners { justify-content: center; }
-          .tb-partner { padding: 1.25rem 1.5rem; }
+          .tb-main { grid-template-columns: 1fr; padding: 3rem 2rem; gap: 2rem; }
           .tb-stats { grid-template-columns: 1fr 1fr; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .tb-marquee-track { animation: none !important; }
         }
       `}</style>
 
       <section className="tb-root" aria-labelledby="trusted-heading" id="track">
         <div className="tb-main">
           <div className="tb-left">
-            {/* Decorative element — hidden from assistive tech */}
             <div className="tb-chevron" aria-hidden="true">{'>>'}</div>
             <h2 className="tb-heading" id="trusted-heading">
               UII lucrează cu instituții din întreaga lume
@@ -128,7 +151,6 @@ export default function TrustedBy() {
               inovare urbană sistemică — ancorată în infrastructură de integrare operațională
               și parteneriate strategice pe termen lung.
             </p>
-            {/* Stats with accessible markup */}
             <dl className="tb-stats" aria-label="Statistici UII">
               <div>
                 <dt className="tb-stat-label">Proiecte spații publice livrate</dt>
@@ -150,12 +172,29 @@ export default function TrustedBy() {
           </div>
         </div>
 
-        {/* Partner list — semantic ul for screen readers */}
-        <ul className="tb-partners" aria-label="Parteneri și instituții colaboratoare" role="list">
-          {partners.map((name, idx) => (
-            <li key={idx} className="tb-partner" role="listitem">{name}</li>
-          ))}
-        </ul>
+        {/* Scrolling partner marquee — 2 rows, opposite directions */}
+        <div className="tb-marquee-wrap" aria-label="Parteneri și instituții colaboratoare">
+          {/* Row 1 — scrolls left */}
+          <div className="tb-marquee-row">
+            <ul className="tb-marquee-track left" aria-hidden="true" style={{ display: 'flex', padding: 0, margin: 0 }}>
+              {row1.map((name, i) => (
+                <li key={i} className="tb-partner">{name}</li>
+              ))}
+            </ul>
+          </div>
+          {/* Row 2 — scrolls right */}
+          <div className="tb-marquee-row">
+            <ul className="tb-marquee-track right" aria-hidden="true" style={{ display: 'flex', padding: 0, margin: 0 }}>
+              {row2.map((name, i) => (
+                <li key={i} className="tb-partner">{name}</li>
+              ))}
+            </ul>
+          </div>
+          {/* Screen-reader-only static list */}
+          <ul className="sr-only">
+            {[...row1, ...row2].map((name, i) => <li key={i}>{name}</li>)}
+          </ul>
+        </div>
       </section>
     </>
   )
