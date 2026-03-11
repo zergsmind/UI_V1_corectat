@@ -127,15 +127,17 @@ export default function Hero() {
           grid-template-columns: repeat(5, 1fr);
         }
         .hero-stat {
-          padding: 1.5rem 2rem;
+          padding: 0.85rem 1.5rem;
           border-right: 1px solid var(--c3);
+          border-bottom: 1px solid var(--c3);
           display: flex;
           flex-direction: column;
-          gap: 0.3rem;
+          gap: 0.2rem;
         }
-        .hero-stat:last-child { border-right: none; }
+        .hero-stat:nth-child(5n) { border-right: none; }
+        .hero-stat:nth-last-child(-n+5) { border-bottom: none; }
         .hero-stat-num {
-          font-size: 1.75rem;
+          font-size: 1.4rem;
           font-weight: 700;
           color: var(--c1);
           line-height: 1;
@@ -161,9 +163,10 @@ export default function Hero() {
         @media (max-width: 900px) {
           .hero-main { grid-template-columns: 1fr; padding: 2.5rem 1.5rem 2rem; min-height: auto; gap: 2rem; }
           .hero-stats-strip { grid-template-columns: repeat(2, 1fr); }
-          .hero-stat:nth-child(2) { border-right: none; }
-          .hero-stat:nth-child(3), .hero-stat:nth-child(4) { border-top: 1px solid var(--c3); }
-          .hero-stat:last-child { grid-column: 1 / -1; border-top: 1px solid var(--c3); border-right: none; }
+          .hero-stat { border-bottom: 1px solid var(--c3); border-right: 1px solid var(--c3); }
+          .hero-stat:nth-child(2n) { border-right: none; }
+          .hero-stat:nth-last-child(-n+2) { border-bottom: none; }
+          .hero-stat:nth-last-child(1):nth-child(odd) { grid-column: 1 / -1; border-right: none; }
           .hero-chevron { font-size: clamp(2.5rem, 10vw, 4rem); }
           .hero-stat { padding: 1rem 1.25rem; }
           .hero-stat-num { font-size: 1.4rem; }
@@ -201,6 +204,31 @@ export default function Hero() {
 
         {/* Stats strip — marked as complementary info */}
         <div className="hero-stats-strip" role="list" aria-label="Statistici urbane globale">
+          <div className="hero-stat" role="listitem">
+            <span className="hero-stat-num" aria-label="47 proiecte">47</span>
+            <span className="hero-stat-label">Proiecte livrate</span>
+            <span className="hero-stat-source">UII, 2020–2025</span>
+          </div>
+          <div className="hero-stat" role="listitem">
+            <span className="hero-stat-num" aria-label="23 de orașe">23</span>
+            <span className="hero-stat-label">Orașe în rețeaua UII</span>
+            <span className="hero-stat-source">UII, 2025</span>
+          </div>
+          <div className="hero-stat" role="listitem">
+            <span className="hero-stat-num" aria-label="180 milioane euro">€180M</span>
+            <span className="hero-stat-label">Fonduri UE facilitate</span>
+            <span className="hero-stat-source">UII, 2025</span>
+          </div>
+          <div className="hero-stat" role="listitem">
+            <span className="hero-stat-num" aria-label="38 de parteneriate">38</span>
+            <span className="hero-stat-label">Parteneriate public-private</span>
+            <span className="hero-stat-source">UII, 2025</span>
+          </div>
+          <div className="hero-stat" role="listitem">
+            <span className="hero-stat-num" aria-label="300 plus inițiative smart city">300+</span>
+            <span className="hero-stat-label">Inițiative smart city în UE</span>
+            <span className="hero-stat-source">EC, 2024</span>
+          </div>
           <div className="hero-stat" role="listitem">
             <span className="hero-stat-num" aria-label="70 la sută">70%</span>
             <span className="hero-stat-label">Populație urbană globală în 2050</span>
