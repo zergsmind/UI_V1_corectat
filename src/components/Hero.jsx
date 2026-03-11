@@ -11,11 +11,17 @@ function LiveClock() {
   const dateStr = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })
 
   return (
-    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.75rem', flexWrap: 'wrap' }}>
-      <span style={{ fontSize: '0.95rem', fontWeight: 500, color: 'var(--c1)', fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.01em' }}>
+    /* aria-live so screen readers announce time updates, aria-atomic groups the full time string */
+    <div
+      style={{ display: 'flex', alignItems: 'baseline', gap: '0.75rem', flexWrap: 'wrap' }}
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label={`Ora curentă: ${timeStr}, ${dateStr}, București`}
+    >
+      <span style={{ fontSize: '0.95rem', fontWeight: 500, color: 'var(--c1)', fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.01em' }} aria-hidden="true">
         {timeStr}
       </span>
-      <span style={{ fontSize: '0.75rem', color: 'var(--c2)', fontWeight: 400 }}>
+      <span style={{ fontSize: '0.75rem', color: 'var(--c2)', fontWeight: 400 }} aria-hidden="true">
         {dateStr} · București
       </span>
     </div>
@@ -161,12 +167,14 @@ export default function Hero() {
         }
       `}</style>
 
-      <section className="hero-root">
+      {/* ADA: section landmark with heading reference */}
+      <section className="hero-root" aria-labelledby="hero-heading">
         <div className="hero-main">
           <div className="hero-left">
-            <div className="hero-chevron">{'>>'}</div>
-            <h1 className="hero-heading">
-              UII conectează<br />inovarea urbană<br />la nivel sistemic
+            {/* Decorative chevron — hidden from assistive tech */}
+            <div className="hero-chevron" aria-hidden="true">{'>>'}</div>
+            <h1 className="hero-heading" id="hero-heading">
+              UII conectează inovarea urbană la nivel sistemic
             </h1>
           </div>
 
@@ -177,8 +185,12 @@ export default function Hero() {
               și parteneriate strategice pe termen lung. Structură neutră. Independentă operațional.
             </p>
             <div className="hero-cta-row">
-              <button className="hero-cta-btn">Colaborează →</button>
-              <button className="hero-cta-link">Află mai mult</button>
+              <button className="hero-cta-btn" aria-label="Colaborează cu UII — deschide formularul de parteneriat">
+                Colaborează <span aria-hidden="true">→</span>
+              </button>
+              <button className="hero-cta-link" aria-label="Află mai multe detalii despre UII">
+                Află mai mult
+              </button>
             </div>
             <div className="hero-clock-row">
               <LiveClock />
@@ -186,29 +198,30 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="hero-stats-strip">
-          <div className="hero-stat">
-            <span className="hero-stat-num">70%</span>
+        {/* Stats strip — marked as complementary info */}
+        <div className="hero-stats-strip" role="list" aria-label="Statistici urbane globale">
+          <div className="hero-stat" role="listitem">
+            <span className="hero-stat-num" aria-label="70 la sută">70%</span>
             <span className="hero-stat-label">Populație urbană globală în 2050</span>
             <span className="hero-stat-source">IEA, 2024</span>
           </div>
-          <div className="hero-stat">
-            <span className="hero-stat-num">112</span>
+          <div className="hero-stat" role="listitem">
+            <span className="hero-stat-num" aria-label="112 orașe">112</span>
             <span className="hero-stat-label">Orașe UE spre neutralitate climatică</span>
             <span className="hero-stat-source">EC Mission, 2025</span>
           </div>
-          <div className="hero-stat">
-            <span className="hero-stat-num">75%</span>
+          <div className="hero-stat" role="listitem">
+            <span className="hero-stat-num" aria-label="75 la sută">75%</span>
             <span className="hero-stat-label">Din energia globală consumată de orașe</span>
             <span className="hero-stat-source">IEA, 2024</span>
           </div>
-          <div className="hero-stat">
-            <span className="hero-stat-num">80%</span>
+          <div className="hero-stat" role="listitem">
+            <span className="hero-stat-num" aria-label="80 la sută">80%</span>
             <span className="hero-stat-label">Din PIB-ul global generat în orașe</span>
             <span className="hero-stat-source">OECD, 2024</span>
           </div>
-          <div className="hero-stat">
-            <span className="hero-stat-num accent">~0.3g</span>
+          <div className="hero-stat" role="listitem">
+            <span className="hero-stat-num accent" aria-label="aproximativ 0,3 grame CO2">~0.3g</span>
             <span className="hero-stat-label">CO₂ per vizită pe acest site</span>
             <span className="hero-stat-source">Mai curat decât 74% din web</span>
           </div>

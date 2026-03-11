@@ -1,22 +1,22 @@
 import React from 'react'
 
 const FoundationIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
     <polyline points="9 22 9 12 15 12 15 22" />
   </svg>
 )
 
 const UIIIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <svg width="24" height="24" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
     <path fill="white" d="M870.9,225.7v151.8h-51c-4.1,0-16.1,9.9-14.1,16.2-5.7,109.5,8.7,227.8-2.2,336.2-20.9,209.5-231.2,285.7-413.7,222.9-237.7-81.7-154.3-367.7-169.7-558.9,0-6.5-10.7-16.4-16.1-16.4h-47.7c-.7,0-1.7,2.7-3.3,2.2v-154h189.8c23.5,0,48.5,26.7,52.9,49s2.2,60.5,2.5,86.5c1.2,104.5-2.8,208.6-.1,312.4,1.5,55.5,13.3,106.1,73.3,124,79.1,23.6,153-19.6,156.7-104.5l.2-414.1c2.1-24.9,29.9-53.4,55.1-53.4h187.6Z"/>
-    <circle fill="#D4613A" cx="276" cy="120" r="80"/>
-    <circle fill="#D4613A" cx="722" cy="120" r="80"/>
+    <circle fill="var(--c2)" cx="276" cy="120" r="80"/>
+    <circle fill="var(--c2)" cx="722" cy="120" r="80"/>
   </svg>
 )
 
 const ChartIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
     <rect x="3"  y="10" width="4" height="11" rx="1" fill="white" />
     <rect x="10" y="5"  width="4" height="16" rx="1" fill="white" />
     <rect x="17" y="13" width="4" height="8"  rx="1" fill="white" />
@@ -63,8 +63,8 @@ export default function ActionCards() {
           margin: 0 auto;
         }
         .ac-card {
-          background: #ffffff;
-          border: 1px solid #e7e7e7;
+          background: var(--c4);
+          border: 1px solid var(--c3);
           border-radius: 1rem;
           padding: 2.5rem;
           display: flex;
@@ -87,14 +87,15 @@ export default function ActionCards() {
           font-size: 1.1rem;
           font-weight: 800;
           letter-spacing: -0.01em;
-          color: #0a0a0a;
+          color: var(--c1);
           text-transform: uppercase;
           margin-top: 1.5rem;
           line-height: 1.2;
         }
         .ac-desc {
           font-size: 0.875rem;
-          color: #5d5d5d;
+          color: var(--c1);
+          opacity: 0.7;
           line-height: 1.65;
           margin-top: 0.875rem;
           flex: 1;
@@ -123,17 +124,20 @@ export default function ActionCards() {
         }
       `}</style>
 
-      <section className="ac-root">
-        <div className="ac-grid">
+      <section className="ac-root" aria-labelledby="actions-heading">
+        <h2 id="actions-heading" className="sr-only">Acțiuni principale</h2>
+        <div className="ac-grid" role="list">
           {actionCards.map((card, idx) => (
-            <div key={idx} className="ac-card">
-              <div className="ac-icon" style={{ background: card.iconBg }}>
+            <article key={idx} className="ac-card" role="listitem">
+              <div className="ac-icon" style={{ background: card.iconBg }} aria-hidden="true">
                 {card.icon}
               </div>
               <h3 className="ac-title">{card.title}</h3>
               <p className="ac-desc">{card.desc}</p>
-              <button className="ac-btn">{card.cta}</button>
-            </div>
+              <button className="ac-btn" aria-label={`${card.cta.replace(' →','')} — ${card.title}`}>
+                {card.cta.replace(' →', '')} <span aria-hidden="true">→</span>
+              </button>
+            </article>
           ))}
         </div>
       </section>

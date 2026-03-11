@@ -60,7 +60,10 @@ export default function TrustedBy() {
           grid-template-columns: 1fr 1fr;
           gap: 1.5rem;
           margin-top: 2rem;
+          list-style: none;
+          padding: 0;
         }
+        .tb-stats > div { display: flex; flex-direction: column-reverse; gap: 0.3rem; }
         .tb-stat-num {
           font-size: 2.2rem;
           font-weight: 700;
@@ -82,6 +85,9 @@ export default function TrustedBy() {
           flex-wrap: wrap;
           align-items: center;
           justify-content: space-between;
+          list-style: none;
+          padding: 0;
+          margin: 0;
         }
         .tb-partner {
           font-size: 0.68rem;
@@ -107,11 +113,12 @@ export default function TrustedBy() {
         }
       `}</style>
 
-      <section className="tb-root">
+      <section className="tb-root" aria-labelledby="trusted-heading" id="track">
         <div className="tb-main">
           <div className="tb-left">
-            <div className="tb-chevron">{'>>'}</div>
-            <h2 className="tb-heading">
+            {/* Decorative element — hidden from assistive tech */}
+            <div className="tb-chevron" aria-hidden="true">{'>>'}</div>
+            <h2 className="tb-heading" id="trusted-heading">
               UII lucrează cu instituții din întreaga lume
             </h2>
           </div>
@@ -121,32 +128,34 @@ export default function TrustedBy() {
               inovare urbană sistemică — ancorată în infrastructură de integrare operațională
               și parteneriate strategice pe termen lung.
             </p>
-            <div className="tb-stats">
+            {/* Stats with accessible markup */}
+            <dl className="tb-stats" aria-label="Statistici UII">
               <div>
-                <div className="tb-stat-num">100+</div>
-                <div className="tb-stat-label">Proiecte spații publice livrate</div>
+                <dt className="tb-stat-label">Proiecte spații publice livrate</dt>
+                <dd className="tb-stat-num">100+</dd>
               </div>
               <div>
-                <div className="tb-stat-num">3</div>
-                <div className="tb-stat-label">Niveluri de decizie acoperite</div>
+                <dt className="tb-stat-label">Niveluri de decizie acoperite</dt>
+                <dd className="tb-stat-num">3</dd>
               </div>
               <div>
-                <div className="tb-stat-num">10</div>
-                <div className="tb-stat-label">Organizații japoneze în pipeline activ</div>
+                <dt className="tb-stat-label">Organizații japoneze în pipeline activ</dt>
+                <dd className="tb-stat-num">10</dd>
               </div>
               <div>
-                <div className="tb-stat-num">2025</div>
-                <div className="tb-stat-label">Smart City Expo Barcelona & Osaka Expo</div>
+                <dt className="tb-stat-label">Smart City Expo Barcelona &amp; Osaka Expo</dt>
+                <dd className="tb-stat-num">2025</dd>
               </div>
-            </div>
+            </dl>
           </div>
         </div>
 
-        <div className="tb-partners">
+        {/* Partner list — semantic ul for screen readers */}
+        <ul className="tb-partners" aria-label="Parteneri și instituții colaboratoare" role="list">
           {partners.map((name, idx) => (
-            <span key={idx} className="tb-partner">{name}</span>
+            <li key={idx} className="tb-partner" role="listitem">{name}</li>
           ))}
-        </div>
+        </ul>
       </section>
     </>
   )

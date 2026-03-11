@@ -100,6 +100,13 @@ export default function FeatureCards() {
   const [activeCard, setActiveCard] = useState(1)
   const contentRefs = useRef([])
 
+  const handleKeyDown = (e, idx) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      setActiveCard(activeCard === idx ? -1 : idx)
+    }
+  }
+
   return (
     <>
       <style>{`
@@ -179,53 +186,68 @@ export default function FeatureCards() {
         }
       `}</style>
 
-      <div className="fc-root">
-        {cards.map((card, idx) => {
-          const isActive = activeCard === idx
-          const borderColor = card.color === 'var(--c1)'
-            ? 'rgba(85,113,116,0.15)'
-            : 'rgba(247,247,232,0.15)'
-          const btnBg = card.color === 'var(--c1)' ? 'var(--c1)' : 'rgba(247,247,232,0.2)'
-          const btnColor = card.color === 'var(--c1)' ? 'var(--c4)' : 'var(--c4)'
+      {/* ADA: section landmark */}
+      <section aria-labelledby="services-heading">
+        <h2 id="services-heading" className="sr-only">Serviciile UII</h2>
+        <div className="fc-root">
+          {cards.map((card, idx) => {
+            const isActive = activeCard === idx
+            const panelId = `fc-panel-${idx}`
+            const headerId = `fc-header-${idx}`
+            const borderColor = card.color === 'var(--c1)'
+              ? 'rgba(85,113,116,0.15)'
+              : 'rgba(247,247,232,0.15)'
+            const btnBg = card.color === 'var(--c1)' ? 'var(--c1)' : 'rgba(247,247,232,0.2)'
+            const btnColor = card.color === 'var(--c1)' ? 'var(--c4)' : 'var(--c4)'
 
-          return (
-            <div
-              key={card.num}
-              className="fc-card"
-              style={{ background: card.bg, color: card.color, borderBottom: `1px solid ${borderColor}` }}
-            >
+            return (
               <div
-                className="fc-header"
-                onClick={() => setActiveCard(isActive ? -1 : idx)}
-                role="button"
-                aria-expanded={isActive}
+                key={card.num}
+                className="fc-card"
+                style={{ background: card.bg, color: card.color, borderBottom: `1px solid ${borderColor}` }}
               >
-                <span className="fc-num" style={{ color: card.color }}>{card.num}</span>
-                <span className="fc-title" style={{ color: card.color }}>{card.title}</span>
-              </div>
+                {/* ADA: button role, keyboard activation, aria-controls linking panel */}
+                <button
+                  id={headerId}
+                  className="fc-header"
+                  onClick={() => setActiveCard(isActive ? -1 : idx)}
+                  onKeyDown={e => handleKeyDown(e, idx)}
+                  aria-expanded={isActive}
+                  aria-controls={panelId}
+                  style={{ background: 'transparent', border: 'none', width: '100%', cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left' }}
+                >
+                  <span className="fc-num" style={{ color: card.color }} aria-hidden="true">{card.num}</span>
+                  <span className="fc-title" style={{ color: card.color }}>{card.title}</span>
+                </button>
 
-              <div
-                className={`fc-body${isActive ? ' active' : ''}`}
-                ref={el => contentRefs.current[idx] = el}
-                aria-hidden={!isActive}
-              >
-                <div className="fc-body-left">
-                  <p className="fc-desc" style={{ color: card.color }}>{card.desc}</p>
-                  <button
-                    className="fc-learn-more"
-                    style={{ background: btnBg, color: btnColor }}
-                  >
-                    Află mai mult →
-                  </button>
-                </div>
-                <div className="fc-body-right">
-                  <CardVisual visual={card.visual} />
+                <div
+                  id={panelId}
+                  className={`fc-body${isActive ? ' active' : ''}`}
+                  ref={el => contentRefs.current[idx] = el}
+                  role="region"
+                  aria-labelledby={headerId}
+                  aria-hidden={!isActive}
+                  inert={!isActive ? '' : undefined}
+                >
+                  <div className="fc-body-left">
+                    <p className="fc-desc" style={{ color: card.color }}>{card.desc}</p>
+                    <button
+                      className="fc-learn-more"
+                      style={{ background: btnBg, color: btnColor }}
+                      aria-label={`Află mai mult despre ${card.title}`}
+                    >
+                      Află mai mult <span aria-hidden="true">→</span>
+                    </button>
+                  </div>
+                  <div className="fc-body-right" aria-hidden="true">
+                    <CardVisual visual={card.visual} />
+                  </div>
                 </div>
               </div>
-            </div>
-          )
-        })}
-      </div>
+            )
+          })}
+        </div>
+      </section>
     </>
   )
 }

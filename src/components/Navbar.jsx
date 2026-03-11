@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 
 const UIILogo = ({ size = 32, onLight = true }) => (
-  <svg width={size} height={size} viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    width={size} height={size} viewBox="0 0 1024 1024"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true" focusable="false"
+  >
     <path fill={onLight ? 'var(--c1)' : 'var(--c4)'} d="M870.9,225.7v151.8h-51c-4.1,0-16.1,9.9-14.1,16.2-5.7,109.5,8.7,227.8-2.2,336.2-20.9,209.5-231.2,285.7-413.7,222.9-237.7-81.7-154.3-367.7-169.7-558.9,0-6.5-10.7-16.4-16.1-16.4h-47.7c-.7,0-1.7,2.7-3.3,2.2v-154h189.8c23.5,0,48.5,26.7,52.9,49s2.2,60.5,2.5,86.5c1.2,104.5-2.8,208.6-.1,312.4,1.5,55.5,13.3,106.1,73.3,124,79.1,23.6,153-19.6,156.7-104.5l.2-414.1c2.1-24.9,29.9-53.4,55.1-53.4h187.6Z"/>
     <path fill="var(--c2)" d="M276.2,52.8c102.8-14.9,113.3,129.4,27.1,142-100.5,14.7-113.6-129.4-27.1-142Z"/>
     <path fill="var(--c2)" d="M722.9,52.8c103.1-15,112.4,128.6,27.1,142-99,15.6-114.7-129.3-27.1-142Z"/>
@@ -9,7 +13,7 @@ const UIILogo = ({ size = 32, onLight = true }) => (
 )
 
 const SunIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
     <circle cx="12" cy="12" r="5" />
     <line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" />
     <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
@@ -19,15 +23,15 @@ const SunIcon = () => (
 )
 
 const MoonIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
   </svg>
 )
 
 const COLOR_THEMES = [
-  { id: '',      label: 'Sage',  swatch: '#557174' },
-  { id: 'terra', label: 'Terra', swatch: '#7b5c45' },
-  { id: 'slate', label: 'Slate', swatch: '#3d5a6c' },
+  { id: '',      label: 'Temă Sage (implicită)',  swatch: '#557174' },
+  { id: 'terra', label: 'Temă Terra',             swatch: '#7b5c45' },
+  { id: 'slate', label: 'Temă Slate',             swatch: '#3d5a6c' },
 ]
 
 export default function Navbar() {
@@ -65,6 +69,7 @@ export default function Navbar() {
           gap: 0.625rem;
           padding: 0 2rem;
           flex-shrink: 0;
+          text-decoration: none;
         }
         .nav-logo-text {
           font-size: 1.05rem;
@@ -87,38 +92,47 @@ export default function Navbar() {
           text-decoration: none;
           white-space: nowrap;
           transition: color 0.2s;
+          padding: 0.25rem 0;
+          border-bottom: 2px solid transparent;
+          min-height: unset;
+          min-width: unset;
         }
         .nav-link:hover { color: var(--c2); }
+        .nav-link:focus-visible {
+          outline: 3px solid var(--c2);
+          outline-offset: 4px;
+          border-radius: 2px;
+        }
         .nav-link-contact { display: flex; align-items: center; gap: 0.25rem; }
-        .nav-link-contact .arrow { color: var(--c2); font-weight: 700; }
+        .nav-link-contact .arrow { color: var(--c2); font-weight: 700; aria-hidden: true; }
         .nav-right { display: flex; align-items: center; height: 100%; flex-shrink: 0; }
         .theme-swatches {
           display: flex;
           align-items: center;
           gap: 0.375rem;
           margin-right: 0.875rem;
-          padding: 0.35rem 0.6rem;
+          padding: 0.35rem 0.75rem;
           border: 1px solid var(--c3);
           border-radius: 2rem;
         }
         .theme-swatch {
-          width: 14px; height: 14px;
+          width: 20px; height: 20px;
           border-radius: 50%;
           border: 2px solid transparent;
           cursor: pointer;
           transition: transform 0.15s, border-color 0.15s;
           flex-shrink: 0;
-          outline: none;
-          padding: 0;
+          min-height: unset;
+          min-width: unset;
         }
         .theme-swatch:hover { transform: scale(1.25); }
         .theme-swatch.active {
           border-color: var(--c3);
           transform: scale(1.2);
-          box-shadow: 0 0 0 2px var(--c4), 0 0 0 3px var(--c3);
+          box-shadow: 0 0 0 2px var(--c4), 0 0 0 3.5px var(--c1);
         }
         .theme-toggle {
-          width: 40px; height: 40px;
+          width: 44px; height: 44px;
           border-radius: 50%;
           border: 1px solid var(--c3);
           background: transparent;
@@ -128,6 +142,8 @@ export default function Navbar() {
           margin-right: 1.5rem;
           transition: background 0.2s;
           flex-shrink: 0;
+          min-height: unset;
+          min-width: unset;
         }
         .theme-toggle:hover { background: var(--c3); }
         .colaboreaza-btn {
@@ -143,33 +159,43 @@ export default function Navbar() {
           display: flex; align-items: center; gap: 0.5rem;
           white-space: nowrap;
           min-width: 200px;
+          min-height: unset;
           justify-content: center;
           transition: background 0.2s;
           font-family: 'Inter', sans-serif;
           border-radius: 0;
         }
         .colaboreaza-btn:hover { background: var(--c2); }
+        .colaboreaza-btn:focus-visible {
+          outline: 3px solid var(--c2);
+          outline-offset: -3px;
+        }
       `}</style>
 
-      <nav className="nav-root">
+      {/* ADA: nav landmark with descriptive label */}
+      <nav className="nav-root" aria-label="Navigație principală">
         <div className="nav-inner">
-          <div className="nav-left">
-            <UIILogo size={32} onLight={true} />
-            <span className="nav-logo-text">UII</span>
-          </div>
 
-          <div className="nav-center">
-            <a href="#about"     className="nav-link">Despre</a>
-            <a href="#services"  className="nav-link">Cum Lucrăm</a>
-            <a href="#ecosystem" className="nav-link">Ecosistem</a>
-            <a href="#track"     className="nav-link">Track Record</a>
-            <a href="#contact"   className="nav-link nav-link-contact">
-              Contact <span className="arrow">→</span>
+          {/* Logo as home link */}
+          <a href="#main-content" className="nav-left" aria-label="UII — pagina principală">
+            <UIILogo size={32} onLight={true} />
+            <span className="nav-logo-text" aria-hidden="true">UII</span>
+          </a>
+
+          {/* Navigation links */}
+          <div className="nav-center" role="list">
+            <a href="#about"     className="nav-link" role="listitem">Despre</a>
+            <a href="#services"  className="nav-link" role="listitem">Cum Lucrăm</a>
+            <a href="#ecosystem" className="nav-link" role="listitem">Ecosistem</a>
+            <a href="#track"     className="nav-link" role="listitem">Track Record</a>
+            <a href="#contact"   className="nav-link nav-link-contact" role="listitem">
+              Contact <span className="arrow" aria-hidden="true">→</span>
             </a>
           </div>
 
           <div className="nav-right">
-            <div className="theme-swatches" role="group" aria-label="Color theme">
+            {/* Color theme picker */}
+            <div className="theme-swatches" role="group" aria-label="Selectează tema de culoare">
               {COLOR_THEMES.map(t => (
                 <button
                   key={t.id}
@@ -177,14 +203,25 @@ export default function Navbar() {
                   style={{ background: t.swatch }}
                   onClick={() => applyColorTheme(t.id)}
                   aria-label={t.label}
+                  aria-pressed={activeTheme === t.id}
                   title={t.label}
                 />
               ))}
             </div>
-            <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+
+            {/* Light/dark toggle */}
+            <button
+              className="theme-toggle"
+              onClick={toggleTheme}
+              aria-label={isDark ? 'Activează tema luminoasă' : 'Activează tema întunecată'}
+              aria-pressed={isDark}
+            >
               {isDark ? <SunIcon /> : <MoonIcon />}
             </button>
-            <button className="colaboreaza-btn">Colaborează →</button>
+
+            <button className="colaboreaza-btn" aria-label="Colaborează cu UII — deschide formularul de parteneriat">
+              Colaborează <span aria-hidden="true">→</span>
+            </button>
           </div>
         </div>
       </nav>
