@@ -8,6 +8,21 @@ const UIILogo = ({ size = 22 }) => (
   </svg>
 )
 
+const InstagramIcon = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+  </svg>
+)
+
+const LinkedInIcon = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect x="2" y="9" width="4" height="12" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+)
 
 export default function Footer() {
   return (
@@ -42,6 +57,7 @@ export default function Footer() {
           display: flex;
           align-items: center;
           gap: 0.5rem;
+          flex-wrap: wrap;
         }
         .ft-brand-name {
           font-size: 0.9rem;
@@ -62,6 +78,41 @@ export default function Footer() {
           text-transform: uppercase;
         }
         .ft-reg-inline span { color: rgba(var(--c4-rgb), 0.5); }
+
+        /* ── Social buttons ── */
+        .ft-social {
+          display: flex;
+          gap: 0.4rem;
+          margin-left: 0.25rem;
+        }
+        .ft-social-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.35rem;
+          padding: 0.3rem 0.65rem;
+          border: 1px solid rgba(var(--c4-rgb), 0.2);
+          border-radius: 0.25rem;
+          background: transparent;
+          color: rgba(var(--c4-rgb), 0.45);
+          font-size: 0.63rem;
+          font-weight: 500;
+          font-family: 'Inter', sans-serif;
+          letter-spacing: 0.08em;
+          text-decoration: none;
+          transition: color 0.15s, border-color 0.15s;
+          min-height: unset;
+          min-width: unset;
+          white-space: nowrap;
+        }
+        .ft-social-btn:hover {
+          color: var(--c4);
+          border-color: rgba(var(--c4-rgb), 0.45);
+        }
+        .ft-social-btn:focus-visible {
+          outline: 2px solid var(--c2);
+          outline-offset: 3px;
+        }
 
         /* ── Link groups ── */
         .ft-links-zone {
@@ -189,10 +240,18 @@ export default function Footer() {
           <div className="ft-brand">
             <div className="ft-brand-top">
               <UIILogo size={22} />
+              <div className="ft-social" aria-label="Rețele sociale">
+                <a href="" className="ft-social-btn" aria-label="Instagram UII" target="_blank" rel="noopener noreferrer">
+                  <InstagramIcon /> Instagram
+                </a>
+                <a href="" className="ft-social-btn" aria-label="LinkedIn UII" target="_blank" rel="noopener noreferrer">
+                  <LinkedInIcon /> LinkedIn
+                </a>
+              </div>
             </div>
             <span className="ft-brand-full">Urban Innovation Institute</span>
             <span className="ft-reg-inline">
-              Est. <span>2019</span> · Fundație · CUI <span>40887291</span> · România
+              Est. <span>2020</span> · Fundație · CUI <span>40887291</span> · România
             </span>
           </div>
 
@@ -221,19 +280,15 @@ export default function Footer() {
             <span className="ft-group-label">Contact</span>
             <div className="ft-contact-row">
               <span className="ft-clabel">General</span>
-              <a href="mailto:contact@urbaninnovationinstitute.ro" className="ft-cvalue">contact@urbaninnovationinstitute.ro</a>
-            </div>
-            <div className="ft-contact-row">
-              <span className="ft-clabel">Parteneriate</span>
-              <a href="mailto:partnerships@urbaninnovationinstitute.ro" className="ft-cvalue">partnerships@urbaninnovationinstitute.ro</a>
+              <a href="mailto:contact@uii.ro" className="ft-cvalue">contact@uii.ro</a>
             </div>
             <div className="ft-contact-row">
               <span className="ft-clabel">Presă</span>
-              <a href="mailto:media@urbaninnovationinstitute.ro" className="ft-cvalue">media@urbaninnovationinstitute.ro</a>
+              <a href="mailto:media@uii.ro" className="ft-cvalue">media@uii.ro</a>
             </div>
             <div className="ft-contact-row">
               <span className="ft-clabel">Sediu</span>
-              <span className="ft-cvalue">București, România</span>
+              <span className="ft-cvalue">Strada Atena nr.1, Sector 1, București, România</span>
             </div>
           </address>
         </div>
